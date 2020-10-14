@@ -40,34 +40,26 @@ class Board:
         blackOrWhite = int(self.__previews_step[-1:])
         counter = [0, 0, 0, 0]  # 分别是水平，垂直，左上至右下，右上至左下
         for i in range(-4, 5):
-            try:
-                if self.__board[blackOrWhite, coor[0] + i, coor[1]]:
-                    counter[0] += 1
-                else:
-                    counter[0] = 0
-            except IndexError:
-                pass
-            try:
-                if self.__board[blackOrWhite, coor[0], coor[1] + i]:
-                    counter[1] += 1
-                else:
-                    counter[1] = 0
-            except IndexError:
-                pass
-            try:
-                if self.__board[blackOrWhite, coor[0] + i, coor[1] + i]:
-                    counter[2] += 1
-                else:
-                    counter[2] = 0
-            except IndexError:
-                pass
-            try:
-                if self.__board[blackOrWhite, coor[0] - i, coor[1] + i]:
-                    counter[3] += 1
-                else:
-                    counter[3] = 0
-            except IndexError:
-                pass
+            if 0 <= coor[0] + i <= 14 and \
+                    self.__board[blackOrWhite, coor[0] + i, coor[1]]:
+                counter[0] += 1
+            else:
+                counter[0] = 0
+            if 0 <= coor[1] + i <= 14 and \
+                    self.__board[blackOrWhite, coor[0], coor[1] + i]:
+                counter[1] += 1
+            else:
+                counter[1] = 0
+            if 0 <= coor[0] + i <= 14 and 0 <= coor[1] + i <= 14 and \
+                    self.__board[blackOrWhite, coor[0] + i, coor[1] + i]:
+                counter[2] += 1
+            else:
+                counter[2] = 0
+            if 0 <= coor[0] - i <= 14 and 0 <= coor[1] + i <= 14 and \
+                    self.__board[blackOrWhite, coor[0] - i, coor[1] + i]:
+                counter[3] += 1
+            else:
+                counter[3] = 0
             if 5 in counter:
                 print(f"{['黑棋', '白棋'][blackOrWhite]}获胜")
                 return True
