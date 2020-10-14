@@ -19,8 +19,7 @@ class Board:
                 print("重复落子")
                 raise
         else:
-            print("落子输入格式错误", f"x:{x}{type(x)}, y:{y}{type(y)}, blackOrWhite:{blackOrWhite}{type(blackOrWhite)}")
-            raise
+            raise TypeError(f"落子输入格式错误, x:{x}:{type(x)}, y:{y}:{type(y)}, blackOrWhite:{blackOrWhite}:{type(blackOrWhite)}")
 
     def get_board(self):
         return self.__board
