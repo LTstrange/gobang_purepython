@@ -6,6 +6,7 @@ import os
 class Board:
     def __init__(self):
         self.__board = np.zeros((2, 15, 15))
+        self.__chess_book = []
         self.__previews_step = None
 
     def put_stone(self, x, y, blackOrWhite):
@@ -15,14 +16,22 @@ class Board:
             if 1 not in self.__board[:, y - 1, ord(x) - 65]:
                 self.__board[blackOrWhite, y - 1, ord(x) - 65] = 1
                 self.__previews_step = x + '-' + str(y) + '-' + str(blackOrWhite)
+                self.__chess_book.append(self.__previews_step)
             else:
                 print("重复落子")
                 raise
         else:
-            raise TypeError(f"落子输入格式错误, x:{x}:{type(x)}, y:{y}:{type(y)}, blackOrWhite:{blackOrWhite}:{type(blackOrWhite)}")
+            raise TypeError(
+                f"落子输入格式错误, x:{x}:{type(x)}, y:{y}:{type(y)}, blackOrWhite:{blackOrWhite}:{type(blackOrWhite)}")
 
     def get_board(self):
         return self.__board
+
+    def get_pre_step(self):
+        return self.__previews_step
+
+    def get_chess_book(self):
+        return self.__chess_book
 
     def check_win(self):
         if self.__previews_step is None:
@@ -100,7 +109,7 @@ class Board:
 if __name__ == '__main__':
     board = Board()
     for i in range(0, 6):
-        board.put_stone(chr(ord('J')+i), 1, 0)
+        board.put_stone(chr(ord('J') + i), 1, 0)
         print(board)
         board.check_win()
         time.sleep(1)
