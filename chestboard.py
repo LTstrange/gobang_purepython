@@ -24,13 +24,16 @@ class Board:
             raise TypeError(
                 f"落子输入格式错误, x:{x}:{type(x)}, y:{y}:{type(y)}, blackOrWhite:{blackOrWhite}:{type(blackOrWhite)}")
 
-    def get_board(self):
+    @property
+    def board(self):
         return self.__board
 
-    def get_pre_step(self):
+    @property
+    def previews_step(self):
         return self.__previews_step
 
-    def get_chess_book(self):
+    @property
+    def chess_book(self):
         return self.__chess_book
 
     def check_win(self):
@@ -61,7 +64,7 @@ class Board:
             else:
                 counter[3] = 0
             if 5 in counter:
-                print(f"{['黑棋', '白棋'][blackOrWhite]}获胜")
+                print(f"{['白棋', '黑棋'][blackOrWhite]}获胜：{[chr(9678), chr(9679)][blackOrWhite]}")
                 return True
         return False
 
